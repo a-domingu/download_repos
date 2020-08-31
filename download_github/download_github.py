@@ -1,5 +1,10 @@
 import git
 import os
+import sys
 
-print('Dentro de la función principal')
-print(os.getcwd())
+def funcion(x):
+    return x**2
+
+
+if __name__ == '__main__':
+    pas
