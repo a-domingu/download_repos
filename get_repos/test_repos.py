@@ -33,11 +33,13 @@ def workspace():
     except Exception as ex:
         print(ex)
 
+
 def test_parse_urls_from_text():
-    assert parse_urls_from_text("https://github.com/devonfw/devon4ng\n    \ndevonfw/devon4j/     \n     ") == ["https://github.com/devonfw/devon4ng", "https://github.com/devonfw/devon4j"] 
+    assert parse_urls_from_text("https://github.com/devonfw/devon4ng\n    \ndevonfw/devon4j/     \n  devonfw/devon4j    \n https://github.com/devonfw/devon4ng/ ") == ["https://github.com/devonfw/devon4ng", "https://github.com/devonfw/devon4j", "https://github.com/devonfw/devon4j", "https://github.com/devonfw/devon4ng"] 
 
 def test_download_repo(workspace):
-    res = download_repos(['https://github.com/devonfw/getting-started'], workspace)    
+    res = download_repos(['https://github.com/devonfw/getting-started', 'https://github.com/sldkfjsdlkfjsldf/sdkjflksjdf'], workspace)    
     assert len(res) == 1
     assert os.path.isfile(os.path.join(workspace, 'getting-started/devonfw_getting_started.pdf')) == True 
+    assert os.path.isfile(os.path.join(workspace, 'sdkjflksjdf')) == False
 
